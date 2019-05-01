@@ -26,52 +26,41 @@ private:
   const size_t CAPACITE;
   
 public:
-  Pile(size_t _capacite)
-  // a completer
-  : donnees(new[] value_type[_capacite]), taille(0), CAPACITE(_capacite)
+  Pile(size_t _capacite) : CAPACITE(_capacite)
   {
-    // a completer
+    donnees = new value_type[_capacite];
+    taille = 0;
   }
   
   ~Pile()
   {
-    // a completer
-    delete[] donnees;
+   delete []donnees;
   }
   
-  Pile(const Pile& other)
+  Pile(const Pile& other) : CAPACITE(other.CAPACITE)
   // a completer
   {
-    // a completer
-    this->donnees = new[] value_type[other->CAPACITE];
-    (size_t*)this->CAPACITE = other->CAPACITE;
-    this->taille = 0;
-    for(size_t i = 0; i < other->taille; ++i) {
-      *(this->donnees + i) = *(other->donnees + i);
-      ++taille;
-    }
-    
+      donnees = new value_type[CAPACITE];
+      for (size_t i = 0; i < other.taille; i++)
+      {
+         this->donnees[i] = other.donnees[i];
+      }
+      this->taille = other.taille;
   }
   
   void empiler(const value_type& v)
   {
-    // a completer
-    if(taille < CAPACITE) {
-      donnees[taille++] = v;
-    }
+    this->donnees[taille++] = v;
   }
   
   void depiler()
   {
-    // a completer
-    if(taille)
-      --taille;
+    this->donnees[taille--];
   }
   
   const_reference sommet() const
   {
-    // a completer
-    return donnees[taille - 1];
+    return this->donnees[taille-1];
   }
   
 };
